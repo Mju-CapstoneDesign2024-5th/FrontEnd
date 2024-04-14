@@ -1,30 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 import "../src/styles/GlobalStyle";
 import { Theme } from "./styles/Theme";
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import Statusbar from './components/Statusbar';
 
 function App() {
   return (
     <ThemeProvider theme={Theme}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <PageArea>
+      </PageArea>
     </ThemeProvider>
   );
 }
+
+const PageArea = styled.div`
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+`
 
 export default App;
