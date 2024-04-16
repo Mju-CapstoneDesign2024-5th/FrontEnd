@@ -21,6 +21,7 @@ const SearchbarBox = styled.div`
     background-color: ${({ theme }) => theme.colors.GRAY};
     border: thin solid white;
     border-radius: 5px;
+    margin-left: 20%;
 `
 
 const InputBox = styled.input`
