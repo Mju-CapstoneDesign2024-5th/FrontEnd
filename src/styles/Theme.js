@@ -4,5 +4,6 @@ export const Theme = {
       GRAY: "#414847",
       MINT: "#B6CBC9",
       BLUE: "#79D6D2",
+      WHITE: "#E2E3E2",
     },
   };
