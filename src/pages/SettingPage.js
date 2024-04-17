@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useTheme } from "../styles/ThemeProvider";
 import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
+import ModeButton from "../components/ModeButton";
 
 const SettingPage = () => {
+    const [ThemeMode, toggleTheme] = useTheme();
     return (
         <PageArea>
             <Statusbar/>
@@ -15,7 +18,7 @@ const SettingPage = () => {
                         <SettingTitle>설정</SettingTitle>
                         <SettingTextBox>
                             <SettingFunction>다크 모드</SettingFunction>
-                            <DarkModeButton>켜기</DarkModeButton>
+                            <ModeButton toggle={toggleTheme} mode={ThemeMode}/>
                         </SettingTextBox>
                         <SettingTextBox>
                             <SettingFunction>닉네임 변경</SettingFunction>
@@ -36,7 +39,7 @@ const PageArea = styled.div`
     width: 100wh;
     height: 100vh;
     display: flex;
-    background-color: ${({ theme }) => theme.colors.DARK};
+    background-color: ${({ theme }) => theme.bgColor};
 `
 
 const SettingArea = styled.div`
@@ -56,7 +59,7 @@ const SettingBox = styled.div`
 const UserNameText = styled.p`
     font-size: 32px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
 `
 
 const SettingContent = styled.div`
@@ -71,7 +74,7 @@ const SettingContent = styled.div`
 const SettingTitle = styled.p`
     font-size: 28px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
 `
 
 const SettingTextBox = styled.div`
@@ -85,22 +88,13 @@ const SettingTextBox = styled.div`
 const SettingFunction = styled.p`
     font-size: 22px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
-`
-
-const DarkModeButton = styled.button`
-    font-size: 22px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
+    color: ${({ theme }) => theme.textColor};
 `
 
 const NicknameButton = styled.button`
     font-size: 22px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -109,7 +103,7 @@ const NicknameButton = styled.button`
 const VersionText = styled.p`
     font-size: 22px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
 `
 
 export default SettingPage;

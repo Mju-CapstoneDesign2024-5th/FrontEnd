@@ -18,7 +18,7 @@ const SearchbarBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${({ theme }) => theme.colors.GRAY};
+    background-color: ${({ theme }) => theme.barColor};
     border: thin solid white;
     border-radius: 5px;
     margin-left: 30%;
@@ -28,7 +28,7 @@ const InputBox = styled.input`
     font-size: 20px;
     width: 85%;
     text-align: center;
-    background-color: ${({ theme }) => theme.colors.GRAY};
+    background-color: ${({ theme }) => theme.barColor};
     border: none;
     color: white;
     outline: none;
