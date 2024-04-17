@@ -14,23 +14,23 @@ const Statusbar = () => {
                 <TitleText>
                     지식IN
                 </TitleText>
-                <FontAwesomeIcon icon={faPlus} color="#79D6D2" />
+                <FontAwesomeIcon icon={faPlus} color="#006A67" />
             </TitleArea>
             <MenuArea>
                 <MenuBox>
-                    <FontAwesomeIcon icon={faHouse} color="#B6CBC9" />
+                    <FontAwesomeIcon icon={faHouse} color="#006A67" />
                     홈
                 </MenuBox>
                 <MenuBox>
-                    <FontAwesomeIcon icon={faStar} color="#B6CBC9" />
+                    <FontAwesomeIcon icon={faStar} color="#006A67" />
                     즐겨찾기한 질문
                 </MenuBox>
                 <MenuBox>
-                    <FontAwesomeIcon icon={faCompass} color="#B6CBC9" />
+                    <FontAwesomeIcon icon={faCompass} color="#006A67" />
                     로그인/회원가입
                 </MenuBox>
                 <MenuBox>
-                    <FontAwesomeIcon icon={faGear} color="#B6CBC9" />
+                    <FontAwesomeIcon icon={faGear} color="#006A67" />
                     프로필/설정
                 </MenuBox>
             </MenuArea>
@@ -45,7 +45,7 @@ const StatusbarBox = styled.div`
     left: 0;
     display: flex;
     flex-direction: column;
-    background-color: ${({ theme }) => theme.colors.GRAY};
+    background-color: ${({ theme }) => theme.barColor};
 `
 
 const TitleArea = styled.div`
@@ -58,7 +58,7 @@ const TitleArea = styled.div`
 const TitleText = styled.span`
     font-size: 32px;
     font-weight: 600;
-    color: ${({ theme }) => theme.colors.MINT};
+    color: ${({ theme }) => theme.titleColor};
     margin-left: 35px;
 `
 
@@ -81,7 +81,7 @@ const MenuBox = styled.div`
     gap: 12px;
     font-size: 20px;
     font-weight: 600;
-    color: ${({ theme }) => theme.colors.MINT};
+    color: ${({ theme }) => theme.titleColor};
     cursor: pointer;
 `
 
