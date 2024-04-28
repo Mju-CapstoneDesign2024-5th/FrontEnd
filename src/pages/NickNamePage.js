@@ -35,7 +35,7 @@ const PageArea = styled.div`
     width: 100wh;
     height: 100vh;
     display: flex;
-    background-color: ${({ theme }) => theme.colors.DARK};
+    background-color: ${({ theme }) => theme.bgColor};
 `
 
 const SettingArea = styled.div`
@@ -55,7 +55,7 @@ const SettingBox = styled.div`
 const SettingTitle = styled.p`
     font-size: 32px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
 `
 
 const SettingContent = styled.div`
@@ -78,13 +78,13 @@ const SettingTextBox = styled.div`
 const SettingFunction = styled.p`
     font-size: 22px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
 `
 
 const NickNameText = styled.p`
     font-size: 22px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
 `
 
 const NickNameInput = styled.input`
@@ -95,20 +95,20 @@ const NickNameInput = styled.input`
     border-width: 0 0 1px;
     background-color: transparent;
     outline: none;
-    caret-color: ${({ theme }) => theme.colors.MINT};
-    color: ${({ theme }) => theme.colors.WHITE};
+    caret-color: ${({ theme }) => theme.AccentColor};
+    color: ${({ theme }) => theme.textColor};
 `
 
 const AlertText = styled.p`
     font-size: 15px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
 `
 
 const SettingButton = styled.button`
     font-size: 22px;
     font-weight: 500;
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.textColor};
     cursor: pointer;
     background-color: transparent;
     border: none;
