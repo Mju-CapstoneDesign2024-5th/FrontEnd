@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useTheme } from "../styles/ThemeProvider";
-import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
 import ModeButton from "../components/ModeButton";
+import Statusbar from "../components/Statusbar";
 
 const SettingPage = () => {
     const [ThemeMode, toggleTheme] = useTheme();
