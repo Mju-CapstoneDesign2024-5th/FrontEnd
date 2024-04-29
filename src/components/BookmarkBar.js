@@ -23,7 +23,7 @@ const BookmarkBar = () => {
 }
 
 const BookmarkBox = styled.div`
-    width: 50%;
+    width: 20vw;
     height: 70px;
     border-radius: 25px;
     margin-top: 15px;
@@ -32,7 +32,7 @@ const BookmarkBox = styled.div`
 `
 
 const LikeBox = styled.div`
-    width: 28%;
+    width: 28vw;
     height: 50px;
     display: flex;
     flex-direction: column;

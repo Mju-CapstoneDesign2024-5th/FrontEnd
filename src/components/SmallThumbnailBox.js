@@ -17,10 +17,11 @@ const SmallThumbnailBox = () => {
 }
 
 const ContentArea = styled.div`
-    width: 20%;
+    width: 50vw;
     height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: ${({ theme }) => theme.bgColor};
     border: 2px solid ${({ theme }) => theme.textColor};
     border-radius: 20px;
@@ -29,11 +30,10 @@ const ContentArea = styled.div`
 `
 
 const ThumbnailBox = styled.div`
-    width: 90%;
+    width: 13vw;
     height: 70%;
     border-radius: 10px;
     background-color: wheat;
-    margin-left: 16px;
     margin-top: 16px;
 `
 

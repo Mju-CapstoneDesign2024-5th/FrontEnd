@@ -30,7 +30,7 @@ const LargeThumbnailBox = () => {
 }
 
 const ContentArea = styled.div`
-    width: 73%;
+    width: 73vw;
     height: 60%;
     border-radius: 5%;
     margin-top: 6px;
@@ -40,7 +40,7 @@ const ContentArea = styled.div`
 `
 
 const LeftsideArea = styled.div`
-    width: 40%;
+    width: 30vw;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@ const LeftsideArea = styled.div`
 `
 
 const ThumbnailBox = styled.div`
-    width: 90%;
+    width: 20vw;
     height: 80%;
     border-radius: 10%;
     margin-top: 21px;
@@ -56,7 +56,7 @@ const ThumbnailBox = styled.div`
 `
 
 const RightsideArea = styled.div`
-    width: 70%;
+    width: 60vw;
     height: 100%;
     display: flex;
     flex-direction: column;
