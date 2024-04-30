@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const SmallThumbnailBox = () => {
+const SmallThumbnailBox = ({title, view, date}) => {
     return(
         <ContentArea>
             <ThumbnailBox/>
             <TextArea>
-                <TitleText>Me at Zoo</TitleText>
+                <TitleText>{title}</TitleText>
                 <InfoBox>
-                    <ViewCount>조회수: 37회</ViewCount>
-                    <RegisterDate>2022/11/26</RegisterDate>
+                    <ViewCount>조회수: {view}회</ViewCount>
+                    <RegisterDate>{date}</RegisterDate>
                 </InfoBox>
             </TextArea>
         </ContentArea>
@@ -17,8 +17,8 @@ const SmallThumbnailBox = () => {
 }
 
 const ContentArea = styled.div`
-    width: 50vw;
-    height: 100%;
+    width: 400px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +30,7 @@ const ContentArea = styled.div`
 `
 
 const ThumbnailBox = styled.div`
-    width: 13vw;
+    width: 90%;
     height: 70%;
     border-radius: 10px;
     background-color: wheat;
