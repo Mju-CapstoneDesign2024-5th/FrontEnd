@@ -6,8 +6,10 @@ import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faCompass } from "@fortawesome/free-solid-svg-icons";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Statusbar = () => {
+    const navigate = useNavigate();
     return (
         <StatusbarBox>
             <TitleArea>
@@ -17,11 +19,11 @@ const Statusbar = () => {
                 <FontAwesomeIcon icon={faPlus} color="#006A67" />
             </TitleArea>
             <MenuArea>
-                <MenuBox>
+                <MenuBox onClick={() => navigate("/")}>
                     <FontAwesomeIcon icon={faHouse} color="#006A67" />
                     홈
                 </MenuBox>
-                <MenuBox>
+                <MenuBox onClick={() => navigate("/bookmark")}>
                     <FontAwesomeIcon icon={faStar} color="#006A67" />
                     즐겨찾기한 질문
                 </MenuBox>
@@ -29,7 +31,7 @@ const Statusbar = () => {
                     <FontAwesomeIcon icon={faCompass} color="#006A67" />
                     로그인/회원가입
                 </MenuBox>
-                <MenuBox>
+                <MenuBox onClick={() => navigate("/setting")}>
                     <FontAwesomeIcon icon={faGear} color="#006A67" />
                     프로필/설정
                 </MenuBox>

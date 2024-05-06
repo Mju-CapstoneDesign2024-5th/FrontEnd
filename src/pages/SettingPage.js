@@ -4,9 +4,11 @@ import { useTheme } from "../styles/ThemeProvider";
 import Searchbar from "../components/Searchbar";
 import ModeButton from "../components/ModeButton";
 import Statusbar from "../components/Statusbar";
+import { useNavigate } from "react-router-dom";
 
 const SettingPage = () => {
     const [ThemeMode, toggleTheme] = useTheme();
+    const navigate = useNavigate();
     return (
         <PageArea>
             <Statusbar/>
@@ -22,7 +24,7 @@ const SettingPage = () => {
                         </SettingTextBox>
                         <SettingTextBox>
                             <SettingFunction>닉네임 변경</SettingFunction>
-                            <NicknameButton>변경</NicknameButton>
+                            <NicknameButton onClick={() => navigate("/nickname")}>변경</NicknameButton>
                         </SettingTextBox>
                         <SettingTextBox>
                             <SettingFunction>버전</SettingFunction>
