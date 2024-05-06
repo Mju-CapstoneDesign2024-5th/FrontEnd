@@ -114,7 +114,6 @@ const MainPage = () => {
 
     useEffect(() => {
         setList(data);
-        console.log(pageCount);
     }, []);
 
     return (
@@ -122,6 +121,9 @@ const MainPage = () => {
             <Statusbar/>
             <MainArea>
                 <Searchbar/>
+                <TitleArea>
+                    <TitleText>메인 페이지</TitleText>
+                </TitleArea>
                 <MainBox>
                     {list
                         .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
@@ -154,13 +156,24 @@ const MainArea = styled.div`
     height: 100%;
 `
 
+const TitleArea = styled.div`
+    width: 80%;
+    height: 10%;
+    margin-left: 5%;
+`
+
+const TitleText = styled.p`
+    font-size: 38px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.textColor};
+`
+
 const MainBox = styled.div`
     width: 70%;
-    height: 80%;
+    height: 70%;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 60px;
-    margin-left: 8%;
+    margin-left: 12%;
     gap: 50px;
 `
 
