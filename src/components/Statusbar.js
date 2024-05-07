@@ -27,7 +27,7 @@ const Statusbar = () => {
                     <FontAwesomeIcon icon={faStar} color="#006A67" />
                     즐겨찾기한 질문
                 </MenuBox>
-                <MenuBox>
+                <MenuBox onClick={() => navigate("/login")}>
                     <FontAwesomeIcon icon={faCompass} color="#006A67" />
                     로그인/회원가입
                 </MenuBox>
