@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<MainPage/>}/>
           <Route path="/bookmark" element={<BookmarkPage/>}/>
           <Route path="/setting" element={<SettingPage/>}/>
-          <Route path="/specific" element={<SpecificPage/>}/>
+          <Route path="/specific/:id" element={<SpecificPage/>}/>
           <Route path="/nickname" element={<NickNamePage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/join' element={<JoinPage/>}/>

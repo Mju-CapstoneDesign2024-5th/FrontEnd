@@ -2,25 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import LargeThumbnailBox from "../components/LargeThumbnailBox";
 import SearchBar from "../components/Searchbar";
-import Answerbar from "../components/Answerbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
-import { ScrollMenu } from "react-horizontal-scrolling-menu";
+import { useLocation, useNavigate } from "react-router-dom";
+import Statusbar from "../components/Statusbar";
 
 const SpecificPage = () => {
+    const location = useLocation();
+    const item = location.state;
     return(
         <PageArea>
+            <Statusbar/>
             <SpecificArea>
                  <SearchBar/>
-                <LargeThumbnailBox/>
+                <LargeThumbnailBox item={item}/>
                 <SmallThumbnailArea>
-                        <SmallThumbnailBox/>
-                        <SmallThumbnailBox/>
-                        <SmallThumbnailBox/>
-                        <SmallThumbnailBox/>
-                        <SmallThumbnailBox/>
                 </SmallThumbnailArea>
             </SpecificArea>
-            <Answerbar/>
         </PageArea>
     )
 }

@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import Axios from "../api/Axios";
 
 const Searchbar = () => {
+    const search = async() => {
+        await Axios.post(`/search`, {
+            query : "감자탕",
+            sort: "sim"
+        })
+        .then((response) => {
+            console.log(response)
+        })
+    }
+    const [content, setContent] = useState('');
+    const saveContent = event => {
+        setContent(event.target.value);
+    }
+
     return (
         <SearchbarBox>
-            <FontAwesomeIcon icon={faMagnifyingGlass} color="#79D6D2" size="lg" />
-            <InputBox type="text" placeholder="Search"/>
+            <FontAwesomeIcon icon={faMagnifyingGlass} color="#79D6D2" size="lg" onClick={() => search()}/>
+            <InputBox type="text" placeholder="Search" onChange={saveContent}/>
         </SearchbarBox>
     )
 }

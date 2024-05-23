@@ -31,6 +31,7 @@ const PaginationWrap = styled.div`
     justify-content: center;
     width: 90%;
     padding: 70px 16px 16px 16px;
+    color: ${({ theme }) => theme.textColor};
 }
 
 .page-item {

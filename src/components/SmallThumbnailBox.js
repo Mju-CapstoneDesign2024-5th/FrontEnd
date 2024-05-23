@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-const SmallThumbnailBox = ({title, view, date}) => {
+const SmallThumbnailBox = ({item}) => {
+    const content = item;
+    const navigate = useNavigate();
+
     return(
-        <ContentArea>
-            <ThumbnailBox/>
+        <ContentArea onClick={() => navigate(`/specific/${content.id}`, {state: content})} >
+            <ThumbnailBox src={content.url}/>
             <TextArea>
-                <TitleText>{title}</TitleText>
+                <TitleText>{content.title}</TitleText>
                 <InfoBox>
-                    <ViewCount>조회수: {view}회</ViewCount>
-                    <RegisterDate>{date}</RegisterDate>
+                    <ViewCount>조회수: {content.view}회</ViewCount>
+                    <RegisterDate>등록일: {content.date}</RegisterDate>
                 </InfoBox>
             </TextArea>
         </ContentArea>
@@ -17,8 +21,8 @@ const SmallThumbnailBox = ({title, view, date}) => {
 }
 
 const ContentArea = styled.div`
-    width: 400px;
-    height: 300px;
+    width: 20vw;
+    height: 28vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,11 +33,10 @@ const ContentArea = styled.div`
     margin-left: 10px;
 `
 
-const ThumbnailBox = styled.div`
+const ThumbnailBox = styled.img`
     width: 90%;
     height: 70%;
     border-radius: 10px;
-    background-color: wheat;
     margin-top: 16px;
 `
 

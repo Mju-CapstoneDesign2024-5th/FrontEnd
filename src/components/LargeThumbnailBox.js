@@ -2,27 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import BookmarkBar from "../components/BookmarkBar";
 
-const LargeThumbnailBox = () => {
+const LargeThumbnailBox = ({item}) => {
     return (
         <ContentArea>
             <LeftsideArea>
-                <ThumbnailBox/>
+                <ThumbnailBox src={item.url}/>
                 <BookmarkBar/>
             </LeftsideArea>
             <RightsideArea>
                 <TitleArea>
-                    <TitleText>이번 주 날씨 어떤가요?</TitleText>
-                    <NicknameText>작성자 닉네임</NicknameText>
+                    <TitleText>{item.title}</TitleText>
+                    <DescriptionText>{item.description}</DescriptionText>
                 </TitleArea>
                 <DivLine/>
                 <ContentBox>
-                    안녕하세요! 오늘 날씨 어떤가요?
-                    비가 오면 우산을 챙겨야 할 것 같아서요!
-                    아시는 분은 답변 부탁드립니다!
                 </ContentBox>
                 <InfoArea>
-                    <ViewCount>조회수: 154회</ViewCount>
-                    <RegisterDate>등록: 2024/03/21</RegisterDate>
+                    <InfoTitle>원본 글로 가고 싶다면?</InfoTitle>
+                    <InfoLink href={item.srcLink}>여기를 클릭!</InfoLink>
                 </InfoArea>
             </RightsideArea>
         </ContentArea>
@@ -34,7 +31,7 @@ const ContentArea = styled.div`
     height: 60%;
     border-radius: 5%;
     margin-top: 6px;
-    margin-left: 24px;
+    margin-left: 5%;
     background-color: ${({ theme }) => theme.barColor};
     display: flex;
 `
@@ -47,7 +44,7 @@ const LeftsideArea = styled.div`
     align-items: center;
 `
 
-const ThumbnailBox = styled.div`
+const ThumbnailBox = styled.img`
     width: 20vw;
     height: 80%;
     border-radius: 10%;
@@ -75,7 +72,7 @@ const TitleText = styled.p`
     color: ${({ theme }) => theme.textColor};
 `
 
-const NicknameText = styled.p`
+const DescriptionText = styled.p`
     font-size: 13px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
@@ -104,18 +101,18 @@ const InfoArea = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-top: 50px;
+    margin-top: 15%;
 `
 
-const ViewCount = styled.p`
-    font-size: 14px;
-    font-weight: 500;
+const InfoTitle = styled.p`
+    font-size: 18px;
+    font-weight: 600;
     color: ${({ theme }) => theme.textColor};
 `
 
-const RegisterDate = styled.p`
-    font-size: 14px;
-    font-weight: 500;
+const InfoLink = styled.a`
+    font-size: 18px;
+    font-weight: 600;
     color: ${({ theme }) => theme.textColor};
 `
 
