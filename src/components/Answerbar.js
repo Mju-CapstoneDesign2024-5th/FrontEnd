@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AnswerBox from "./AnswerBox";
 
-const Answerbar = () => {
+const Answerbar = ({answers}) => {
+
     return (
         <AnswerbarBox>
             <TitleArea>
@@ -14,34 +15,13 @@ const Answerbar = () => {
                 <FontAwesomeIcon icon={faPlus} color="#006A67" />
             </TitleArea>
             <AnswerCountBox>
-                <AnswerTitle>답변: 11개</AnswerTitle>
+                <AnswerTitle>답변: {answers.length}개</AnswerTitle>
             </AnswerCountBox>
             <DivLine/>
             <AnswerContentBox>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
-                <AnswerBox/>
+                {answers.map((item, index) => (
+                    <AnswerBox item={item} key={index}/>
+                ))}
             </AnswerContentBox>
         </AnswerbarBox>
     )

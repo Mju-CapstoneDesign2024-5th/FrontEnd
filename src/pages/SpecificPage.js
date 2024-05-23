@@ -4,20 +4,21 @@ import LargeThumbnailBox from "../components/LargeThumbnailBox";
 import SearchBar from "../components/Searchbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
 import { useLocation, useNavigate } from "react-router-dom";
-import Statusbar from "../components/Statusbar";
+import Answerbar from "../components/Answerbar";
 
 const SpecificPage = () => {
     const location = useLocation();
     const item = location.state;
+
     return(
         <PageArea>
-            <Statusbar/>
             <SpecificArea>
                  <SearchBar/>
                 <LargeThumbnailBox item={item}/>
                 <SmallThumbnailArea>
                 </SmallThumbnailArea>
             </SpecificArea>
+            <Answerbar answers={item.answerDetails}/>
         </PageArea>
     )
 }
