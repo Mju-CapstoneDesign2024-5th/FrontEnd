@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const AnswerBox = () => {
+const AnswerBox = ({item}) => {
     return (
         <ContentBox>
             <ContentText>
-                Statistically speaking, there's definitely asdawd dasd someone out there that genuinely thinks this is badass and cool
+                {item}
             </ContentText>
         </ContentBox>
     )
@@ -21,12 +21,13 @@ const ContentBox = styled.div`
 `
 
 const ContentText = styled.p`
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     color: ${({ theme }) => theme.bgColor};
     margin-top: 12px;
     margin-left: 12px;
     margin-right: 12px;
+    line-height: 25px;
 `
 
 export default AnswerBox;
