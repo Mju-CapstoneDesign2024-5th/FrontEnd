@@ -4,116 +4,32 @@ import Pagination from "../components/Pagination";
 import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
-
-const data = [
-    {
-        "title": "1",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "2",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "3",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "4",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "5",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "6",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "7",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "8",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "9",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "10",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "11",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "12",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "13",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "14",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "15",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "16",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "17",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "18",
-        "view": "22",
-        "date": "2022/01/22"
-    },
-    {
-        "title": "19",
-        "view": "22",
-        "date": "2022/01/22"
-    }
-];
+import Axios from "../api/Axios";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [list, setList] = useState([]);
-    const PER_PAGE = 6;
+    const PER_PAGE = 5;
     const pageCount = Math.ceil(list.length / PER_PAGE);
     const handlePageChange = ({selected}) => {
         setCurrentPage(selected);
     }
+    const main = async () => {
+        await Axios.get(
+          "/main"
+        )
+          .then((response) => {
+            setList(response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      };
+    
 
     useEffect(() => {
-        setList(data);
+        main();
     }, []);
 
     return (
@@ -128,7 +44,7 @@ const MainPage = () => {
                     {list
                         .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
                         .map((item, index) => (
-                            <SmallThumbnailBox title={item.title} view={item.view} date={item.date} key={index}/>
+                            <SmallThumbnailBox item={item} key={index}/>
                         ))
                     }
                 </MainBox>
@@ -169,11 +85,11 @@ const TitleText = styled.p`
 `
 
 const MainBox = styled.div`
-    width: 70%;
+    width: 85%;
     height: 70%;
     display: flex;
     flex-wrap: wrap;
-    margin-left: 12%;
+    margin-left: 10%;
     gap: 50px;
 `
 
