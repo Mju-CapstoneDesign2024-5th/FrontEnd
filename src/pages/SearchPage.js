@@ -27,8 +27,6 @@ const SearchPage = () => {
         setCurrentPage(selected);
     };
 
-    console.log(flatList);
-
     return (
         <PageArea>
             <Statusbar />

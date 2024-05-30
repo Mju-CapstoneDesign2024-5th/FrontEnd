@@ -1,20 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Statusbar from "../components/Statusbar";
 import { useNavigate } from "react-router-dom";
+import Axios from "../api/Axios";
 
 const JoinPage = () => {
     const navigate = useNavigate();
+    const [myId, setmyId] = useState('');
+    const [myName, setmyName] = useState('');
+    const [myGender, setmyGender] = useState();
+    const [myPassword, setmyPassword] = useState('');
+    const [myEmail, setmyEmail] = useState('');
+
+    const handleJoinClick = () => {
+        if(myId === undefined | myName === undefined | myGender === undefined | myPassword === undefined | myEmail === undefined | myId === '' | myName === '' |
+            myGender === '' | myPassword === '' | myEmail === ''){
+            alert('빈칸으로는 회원가입 할 수 없습니다.');
+        } else {
+            try {
+                const response = Axios.post('/user/save', {
+                    userId : myId,
+                    userName: myName,
+                    userGender: myGender,
+                    userPasswd: myPassword,
+                    userEmail: myEmail
+                });
+                localStorage.setItem('username', myName);
+                navigate('/login');
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
     return (
         <PageArea>
             <Statusbar/>
             <LoginArea>
                 <LoginBox>
                     <LoginTitle>회원가입</LoginTitle>
-                    <IdInput placeholder="아이디"/>
-                    <PasswordInput placeholder="비밀번호"/>
+                    <InfoInput required placeholder="아이디" type="text" value={myId || ""} onChange={(e) => setmyId(e.target.value)}/>
+                    <InfoInput required placeholder="닉네임" type="text" value={myName || ""} onChange={(e) => setmyName(e.target.value)}/>
+                    <InfoInput required placeholder="남자면 M, 여자면 F 입력" type="text" value={myGender || ""} onChange={(e) => setmyGender(e.target.value)}/>
+                    <InfoInput required placeholder="비밀번호" type="password" value={myPassword || ""} onChange={(e) => setmyPassword(e.target.value)}/>
+                    <InfoInput required placeholder="이메일" type="text" value={myEmail || ""} onChange={(e) => setmyEmail(e.target.value)}/>
                     <ButtonArea>
-                        <JoinButton onClick={() => navigate("/login")}>회원가입</JoinButton>
+                        <JoinButton onClick={handleJoinClick}>회원가입</JoinButton>
                     </ButtonArea>
                 </LoginBox>
             </LoginArea>
@@ -50,28 +81,16 @@ const LoginTitle = styled.p`
     color: ${({ theme }) => theme.textColor};
     font-weight: 600;
     font-size: 36px;
-    margin-top: 160px;
+    margin-top: 100px;
 `
 
-const IdInput = styled.input`
+const InfoInput = styled.input`
     border: 1px solid ${({ theme }) => theme.textColor};
     border-width: 0 0 1px;
     width: 80%;
     outline: none;
     background-color: ${({ theme }) => theme.bgColor};
-    margin-top: 162px;
-    padding: 10px;
-    color: ${({ theme }) => theme.textColor};
-    font-size: 24px;
-`
-
-const PasswordInput = styled.input`
-    border: 1px solid ${({ theme }) => theme.textColor};
-    border-width: 0 0 1px;
-    width: 80%;
-    outline: none;
-    background-color: ${({ theme }) => theme.bgColor};
-    margin-top: 162px;
+    margin-top: 100px;
     padding: 10px;
     color: ${({ theme }) => theme.textColor};
     font-size: 24px;

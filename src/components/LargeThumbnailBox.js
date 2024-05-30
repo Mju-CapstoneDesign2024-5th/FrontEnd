@@ -4,8 +4,15 @@ import BookmarkBar from "../components/BookmarkBar";
 
 const LargeThumbnailBox = ({item}) => {
     const extractUrl = (url) => {
-        const index = url.indexOf('http://');
-        return index !== -1 ? url.substring(index) : null;
+        let index = url.indexOf("https://");
+        if (index === -1) {
+            index = url.indexOf("http://");
+        }
+  
+        if (index !== -1) {
+            return url.substring(index);
+        }
+        return null; // 'https://'나 'http://'가 없으면 null 반환
     };
 
     const validUrl = extractUrl(item.url);
