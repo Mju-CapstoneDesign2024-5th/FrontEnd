@@ -6,9 +6,16 @@ const SmallThumbnailBox = ({item}) => {
     const content = item;
     const navigate = useNavigate();
 
+    const extractUrl = (url) => {
+        const index = url.indexOf('http://');
+        return index !== -1 ? url.substring(index) : null;
+    };
+
+    const validUrl = extractUrl(content.url);
+
     return(
         <ContentArea onClick={() => navigate(`/specific/${content.id}`, {state: content})} >
-            <ThumbnailBox src={content.url}/>
+            <ThumbnailBox src={validUrl}/>
             <TextArea>
                 <TitleText>{content.title}</TitleText>
                 <InfoBox>

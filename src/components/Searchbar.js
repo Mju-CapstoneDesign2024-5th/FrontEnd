@@ -3,26 +3,35 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Axios from "../api/Axios";
+import { useNavigate } from "react-router-dom";
 
-const Searchbar = () => {
-    const search = async() => {
-        await Axios.post(`/search`, {
-            query : "감자탕",
-            sort: "sim"
-        })
-        .then((response) => {
-            console.log(response)
-        })
-    }
+const Searchbar = ({setList}) => {
+    const navigate = useNavigate();
     const [content, setContent] = useState('');
-    const saveContent = event => {
-        setContent(event.target.value);
-    }
+
+    const handleKeyDown = async (e) => {
+        if (e.key === 'Enter') {
+            await search(content);
+        }
+    };
+
+    const search = async (content) => {
+        try {
+            const response = await Axios.post('/search', {
+                query: content,
+                sort: "sim"
+            });
+            const searchData = response.data;
+            navigate(`/search/${content}`, { state: searchData });
+        } catch (error) {
+            console.error("Error searching data:", error);
+        }
+    };
 
     return (
         <SearchbarBox>
-            <FontAwesomeIcon icon={faMagnifyingGlass} color="#79D6D2" size="lg" onClick={() => search()}/>
-            <InputBox type="text" placeholder="Search" onChange={saveContent}/>
+            <FontAwesomeIcon icon={faMagnifyingGlass} color="#79D6D2" size="lg" onClick={() => search(content)}/>
+            <InputBox type="text" placeholder="Search" value={content} onChange={(e) => setContent(e.target.value)} onKeyDown={handleKeyDown}/>
         </SearchbarBox>
     )
 }

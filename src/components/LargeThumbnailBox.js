@@ -3,10 +3,17 @@ import styled from "styled-components";
 import BookmarkBar from "../components/BookmarkBar";
 
 const LargeThumbnailBox = ({item}) => {
+    const extractUrl = (url) => {
+        const index = url.indexOf('http://');
+        return index !== -1 ? url.substring(index) : null;
+    };
+
+    const validUrl = extractUrl(item.url);
+
     return (
         <ContentArea>
             <LeftsideArea>
-                <ThumbnailBox src={item.url}/>
+                <ThumbnailBox src={validUrl}/>
                 <BookmarkBar/>
             </LeftsideArea>
             <RightsideArea>
@@ -49,7 +56,7 @@ const LeftsideArea = styled.div`
 
 const ThumbnailBox = styled.img`
     width: 20vw;
-    height: 80%;
+    height: 50vh;
     border-radius: 10%;
     margin-top: 21px;
     background-color: wheat;
@@ -70,7 +77,7 @@ const TitleArea = styled.div`
 `
 
 const TitleText = styled.p`
-    font-size: 20px;
+    font-size: 32px;
     font-weight: 600;
     color: ${({ theme }) => theme.textColor};
 `
@@ -92,7 +99,7 @@ const DivLine = styled.div`
 const ContentBox = styled.div`
     width: 90%;
     height: 30%;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 500;
     margin-top: 22px;
     color: ${({ theme }) => theme.textColor};

@@ -1,52 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Pagination from "../components/Pagination";
 import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
 import Axios from "../api/Axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-const MainPage = () => {
+const SearchPage = () => {
+    const location = useLocation();
+    const params = useParams();
+    const [flatList, setFlatList] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [list, setList] = useState([]);
     const PER_PAGE = 5;
-    const pageCount = Math.ceil(list.length / PER_PAGE);
-    const handlePageChange = ({selected}) => {
-        setCurrentPage(selected);
-    }
-    const main = async () => {
-        await Axios.get(
-          "/main"
-        )
-          .then((response) => {
-            setList(response.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
-      };
-
-      console.log(list);
     
-
     useEffect(() => {
-        main();
-    }, []);
+        const item = location.state || [];
+        const flattened = item.flat();
+        setFlatList(flattened);
+    }, [location.state]);
+    
+    const pageCount = Math.ceil(flatList.length / PER_PAGE);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    console.log(flatList);
 
     return (
         <PageArea>
-            <Statusbar/>
+            <Statusbar />
             <MainArea>
-                <Searchbar/>
+                <Searchbar />
                 <TitleArea>
-                    <TitleText>메인 페이지</TitleText>
+                    <TitleText>{params.content}에 대한 검색결과</TitleText>
                 </TitleArea>
                 <MainBox>
-                    {list
+                    {flatList
                         .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
                         .map((item, index) => (
-                            <SmallThumbnailBox item={item} key={index}/>
+                            <SmallThumbnailBox item={item} key={index} />
                         ))
                     }
                 </MainBox>
@@ -59,7 +54,7 @@ const MainPage = () => {
                 )}
             </MainArea>
         </PageArea>
-    )
+    );
 }
 
 const PageArea = styled.div`
@@ -95,4 +90,4 @@ const MainBox = styled.div`
     gap: 50px;
 `
 
-export default MainPage;
+export default SearchPage;
