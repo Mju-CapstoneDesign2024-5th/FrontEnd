@@ -9,13 +9,14 @@ import { useNavigate } from "react-router-dom";
 const SettingPage = () => {
     const [ThemeMode, toggleTheme] = useTheme();
     const navigate = useNavigate();
+    const username = localStorage.getItem('username');
     return (
         <PageArea>
             <Statusbar/>
             <SettingArea>
                 <Searchbar/>
                 <SettingBox>
-                    <UserNameText>유저이름</UserNameText>
+                    <UserNameText>안녕하세요, {username ? username : "로그인을 해주세요"}!</UserNameText>
                     <SettingContent>
                         <SettingTitle>설정</SettingTitle>
                         <SettingTextBox>

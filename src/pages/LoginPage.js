@@ -1,20 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Statusbar from "../components/Statusbar";
 import { useNavigate } from "react-router-dom";
+import Axios from "../api/Axios";
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const [myId, setMyId] = useState('');
+    const [myPassword, setMyPassword] = useState('');
+
+    const handleLoginClick = async () => {
+        if(myId === undefined | myPassword === undefined | myId === '' | myPassword === ''){
+            alert('빈칸으로는 로그인 할 수 없습니다.');
+        } else {
+            try {
+                const response = await Axios.post('/user/login', {
+                    userId: myId,
+                    userPasswd: myPassword,
+                });
+                localStorage.setItem('id', myId);
+                navigate('/');
+            } catch (error) {
+                if (error.response && error.response.status === 401) {
+                    alert("등록되지 않은 정보입니다.");
+                } else {
+                    alert("아이디 또는 비밀번호를 확인하세요.");
+                }
+            }
+        }
+    }
+
     return (
         <PageArea>
             <Statusbar/>
             <LoginArea>
                 <LoginBox>
                     <LoginTitle>로그인</LoginTitle>
-                    <IdInput placeholder="아이디"/>
-                    <PasswordInput placeholder="비밀번호"/>
+                    <IdInput required placeholder="아이디" type="text" value={myId || ""} onChange={(e) => setMyId(e.target.value)}/>
+                    <PasswordInput required placeholder="비밀번호" type="password" value={myPassword || ""} onChange={(e) => setMyPassword(e.target.value)}/>
                     <ButtonArea>
-                        <LoginButton>로그인</LoginButton>
+                        <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
                         <JoinButton onClick={() => navigate("/join")}>회원이 아니신가요?</JoinButton>
                     </ButtonArea>
                 </LoginBox>

@@ -10,6 +10,14 @@ import { useNavigate } from "react-router-dom";
 
 const Statusbar = () => {
     const navigate = useNavigate();
+    const isLogin = localStorage.getItem('id');
+
+    const handleLogout = () => {
+        localStorage.removeItem('id');
+        localStorage.removeItem('username');
+        navigate("/login");
+    };
+
     return (
         <StatusbarBox>
             <TitleArea>
@@ -27,9 +35,9 @@ const Statusbar = () => {
                     <FontAwesomeIcon icon={faStar} color="#006A67" />
                     즐겨찾기한 질문
                 </MenuBox>
-                <MenuBox onClick={() => navigate("/login")}>
+                <MenuBox onClick={isLogin ? handleLogout : () => navigate("/login")}>
                     <FontAwesomeIcon icon={faCompass} color="#006A67" />
-                    로그인/회원가입
+                    {isLogin ? '로그아웃' : '로그인/회원가입'}
                 </MenuBox>
                 <MenuBox onClick={() => navigate("/setting")}>
                     <FontAwesomeIcon icon={faGear} color="#006A67" />
