@@ -15,13 +15,16 @@ const SmallThumbnailBox = ({item}) => {
         if (index !== -1) {
             return url.substring(index);
         }
-        return null; // 'https://'나 'http://'가 없으면 null 반환
+        return null;
     };
 
     const validUrl = extractUrl(content.url);
 
     return(
-        <ContentArea onClick={() => navigate(`/specific/${content.id}`, {state: content})} >
+        <ContentArea onClick={() => {
+            navigate(`/specific/${content.id}`, { state: content });
+            window.location.reload();
+        }}>
             <ThumbnailBox src={validUrl}/>
             <TextArea>
                 <TitleText>{content.title}</TitleText>
@@ -36,7 +39,7 @@ const SmallThumbnailBox = ({item}) => {
 
 const ContentArea = styled.div`
     width: 20vw;
-    height: 28vh;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,7 +67,7 @@ const TextArea = styled.div`
 `
 
 const TitleText = styled.p`
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
 `
