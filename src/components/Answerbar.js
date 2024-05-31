@@ -3,8 +3,11 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AnswerBox from "./AnswerBox";
+import { useNavigate } from "react-router-dom";
 
 const Answerbar = ({answers}) => {
+
+    const navigate = useNavigate();
 
     return (
         <AnswerbarBox>
@@ -13,6 +16,7 @@ const Answerbar = ({answers}) => {
                     지식IN
                 </TitleText>
                 <FontAwesomeIcon icon={faPlus} color="#006A67" />
+                <GoHomeButton onClick={() => navigate("/")}>메인으로 돌아가기</GoHomeButton>
             </TitleArea>
             <AnswerCountBox>
                 <AnswerTitle>답변: {answers.length}개</AnswerTitle>
@@ -47,6 +51,20 @@ const TitleArea = styled.div`
     display: flex;
     margin-top: 64px;
     margin-left: 10%;
+`
+
+const GoHomeButton = styled.button`
+    width: 200px;
+    height: 50px;
+    border-radius: 100px;
+    background-color: ${({ theme }) => theme.titleColor};
+    margin-left: 33%;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: ${({ theme }) => theme.barColor};
+    cursor: pointer;
 `
 
 const TitleText = styled.span`
