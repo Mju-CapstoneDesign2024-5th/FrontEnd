@@ -5,6 +5,7 @@ import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
 import Axios from "../api/Axios";
+import Loading from "../components/Loading";
 
 const BookmarkPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
@@ -24,7 +25,7 @@ const BookmarkPage = () => {
                 const response = await Axios.post("/contents/find", { userId: myId });
                 setList(response.data);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.log(error);
             }
         };
         
@@ -43,14 +44,20 @@ const BookmarkPage = () => {
                 </TitleArea>
                 <MainBox>
                     {myId ? (
-                        list
-                        .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
-                        .map((item, index) => (
-                        <SmallThumbnailBox item={item} key={index} />
-                        ))
+                        isLoading ? (
+                            <Loading />
+                        ) : list.length === 0 ? (
+                            <LoginText>즐겨찾기한 질문이 없습니다</LoginText>
+                        ) : (
+                            list
+                                .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
+                                .map((item, index) => (
+                                    <SmallThumbnailBox item={item} key={index} />
+                                ))
+                        )
                     ) : (
                         <LoginText>로그인을 해주세요</LoginText>
-                )}
+                    )}
                 </MainBox>
                 {pageCount > 0 && (
                     <Pagination
