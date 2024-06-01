@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BookmarkBar from "../components/BookmarkBar";
+import DeleteBar from "./DeleteBar";
 
 const LargeThumbnailBox = ({item}) => {
     const extractUrl = (url) => {
@@ -12,16 +13,26 @@ const LargeThumbnailBox = ({item}) => {
         if (index !== -1) {
             return url.substring(index);
         }
-        return null; // 'https://'나 'http://'가 없으면 null 반환
+        return null;
     };
 
     const validUrl = extractUrl(item.url);
+    const myId = localStorage.getItem('id');
 
     return (
         <ContentArea>
             <LeftsideArea>
                 <ThumbnailBox src={validUrl}/>
-                <BookmarkBar/>
+                <ButtonArea>
+                    {myId ? (
+                        <>
+                            <BookmarkBar questionId={item.id} userId={myId} />
+                            <DeleteBar questionId={item.id} userId={myId} />
+                        </>
+                    ) : (
+                        <CautionMessage>로그인으로 즐겨찾기 기능을 이용해보세요</CautionMessage>
+                    )}
+                </ButtonArea>
             </LeftsideArea>
             <RightsideArea>
                 <TitleArea>
@@ -45,7 +56,7 @@ const LargeThumbnailBox = ({item}) => {
 
 const ContentArea = styled.div`
     width: 73%;
-    height: 60%;
+    height: 61%;
     border-radius: 5%;
     margin-top: 6px;
     margin-left: 1%;
@@ -67,6 +78,19 @@ const ThumbnailBox = styled.img`
     border-radius: 10%;
     margin-top: 21px;
     background-color: wheat;
+`
+
+const ButtonArea = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+`
+
+const CautionMessage = styled.p`
+    font-size: 24px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.textColor};
 `
 
 const RightsideArea = styled.div`

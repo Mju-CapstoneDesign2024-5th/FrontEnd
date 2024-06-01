@@ -1,34 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 import Axios from "../api/Axios";
+import { useNavigate } from "react-router-dom";
 
-const BookmarkBar = ({ questionId, userId }) => {
+const DeleteBar = ({questionId, userId}) => {
     const id = userId;
     const qid = questionId;
+    const navigate = useNavigate();
 
-    const addBookmark = async (id, qid) => {
+    const deleteBookmark = async (id, qid) => {
         try {
-            const response = await Axios.post("/favorites/save", {
+            const response = await Axios.post("/favorites/delete", {
                 userId: id,
                 contentsId: qid
             });
-            alert("추가 완료");
+            alert("삭제 완료");
+            navigate("/bookmark");
         } catch (error) {
-            console.error("Error adding bookmark:", error);
+            console.error("Error deleting bookmark:", error);
         }
     };
 
     return (
-        <BookmarkBox onClick={() => addBookmark(id, qid)}>
+        <BookmarkBox onClick={() => deleteBookmark(id, qid)}>
             <LikeBox>
-                <FontAwesomeIcon icon={faStar} size="2x" />
-                즐겨찾기 추가
+                <FontAwesomeIcon icon={faX} size="2x" />
+                즐겨찾기 삭제
             </LikeBox>
         </BookmarkBox>
     );
-};
+}
 
 const BookmarkBox = styled.div`
     width: 10vw;
@@ -54,4 +57,4 @@ const LikeBox = styled.div`
     font-size: 24px;
 `
 
-export default BookmarkBar;
+export default DeleteBar;

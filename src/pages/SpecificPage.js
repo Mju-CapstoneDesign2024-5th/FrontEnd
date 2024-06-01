@@ -12,6 +12,8 @@ const SpecificPage = () => {
     const item = location.state;
     const [similar, setSimilar] = useState([]);
 
+    console.log(item);
+
     const loadSimilar = async () => {
         await Axios.post("/sim", {
             contentsId : item.id
