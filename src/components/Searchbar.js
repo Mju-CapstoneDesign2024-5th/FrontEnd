@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Axios from "../api/Axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Searchbar = ({setIsLoading}) => {
     const navigate = useNavigate();
@@ -25,7 +26,14 @@ const Searchbar = ({setIsLoading}) => {
             const searchData = response.data;
             navigate(`/search/${content}`, { state: searchData });
         } catch (error) {
-            console.error("Error searching data:", error);
+            Swal.fire({
+                icon: "warning",
+                title: "검색 실패",
+                text: "관리자에게 문의하세요",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
         } finally {
             setIsLoading(false);
         }

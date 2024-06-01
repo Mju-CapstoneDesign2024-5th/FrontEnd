@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Statusbar from "../components/Statusbar";
 import { useNavigate } from "react-router-dom";
 import Axios from "../api/Axios";
+import Swal from "sweetalert2";
 
 const JoinPage = () => {
     const navigate = useNavigate();
@@ -15,7 +16,14 @@ const JoinPage = () => {
     const handleJoinClick = () => {
         if(myId === undefined | myName === undefined | myGender === undefined | myPassword === undefined | myEmail === undefined | myId === '' | myName === '' |
             myGender === '' | myPassword === '' | myEmail === ''){
-            alert('빈칸으로는 회원가입 할 수 없습니다.');
+                Swal.fire({
+                    icon: "warning",
+                    title: "회원가입 실패",
+                    text: "빈칸으로는 회원가입할 수 없습니다",
+                    showCancelButton: true,
+                    confirmButtonText: "확인",
+                    cancelButtonText: "취소",
+                })
         } else {
             try {
                 const response = Axios.post('/user/save', {

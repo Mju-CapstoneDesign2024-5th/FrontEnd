@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Statusbar from "../components/Statusbar";
 import { useNavigate } from "react-router-dom";
 import Axios from "../api/Axios";
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -11,7 +12,14 @@ const LoginPage = () => {
 
     const handleLoginClick = async () => {
         if(myId === undefined | myPassword === undefined | myId === '' | myPassword === ''){
-            alert('빈칸으로는 로그인 할 수 없습니다.');
+            Swal.fire({
+                icon: "warning",
+                title: "로그인 실패",
+                text: "빈칸으로는 로그인할 수 없습니다",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
         } else {
             try {
                 const response = await Axios.post('/user/login', {
@@ -22,9 +30,23 @@ const LoginPage = () => {
                 navigate('/');
             } catch (error) {
                 if (error.response && error.response.status === 401) {
-                    alert("등록되지 않은 정보입니다.");
+                    Swal.fire({
+                        icon: "warning",
+                        title: "로그인 실패",
+                        text: "등록되지 않은 정보입니다.",
+                        showCancelButton: true,
+                        confirmButtonText: "확인",
+                        cancelButtonText: "취소",
+                    })
                 } else {
-                    alert("아이디 또는 비밀번호를 확인하세요.");
+                    Swal.fire({
+                        icon: "warning",
+                        title: "로그인 실패",
+                        text: "아이디 또는 비밀번호를 확인하세요.",
+                        showCancelButton: true,
+                        confirmButtonText: "확인",
+                        cancelButtonText: "취소",
+                    })
                 }
             }
         }

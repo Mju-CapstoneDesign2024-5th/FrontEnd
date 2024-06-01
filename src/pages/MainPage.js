@@ -6,6 +6,7 @@ import Searchbar from "../components/Searchbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
 import Axios from "../api/Axios";
 import Loading from "../components/Loading";
+import Swal from "sweetalert2";
 
 const MainPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
@@ -24,7 +25,14 @@ const MainPage = () => {
             const response = await Axios.get("/main");
             setList(response.data);
         } catch (error) {
-            console.error("Error fetching data:", error);
+            Swal.fire({
+                icon: "warning",
+                title: "데이터 로딩 실패",
+                text: "관리자에게 문의하세요",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
         } finally {
             setIsLoading(false);
         }
