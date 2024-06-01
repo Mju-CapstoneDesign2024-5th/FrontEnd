@@ -1,16 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTheme } from "../styles/ThemeProvider";
 import Searchbar from "../components/Searchbar";
 import ModeButton from "../components/ModeButton";
 import Statusbar from "../components/Statusbar";
 import { useNavigate } from "react-router-dom";
+import Axios from "../api/Axios";
+import Swal from "sweetalert2";
 
 const SettingPage = () => {
     const [ThemeMode, toggleTheme] = useTheme();
     const navigate = useNavigate();
-    const username = localStorage.getItem('username');
+    const id = localStorage.getItem('id');
+    const [username, setUsername] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
+    const loadUser = async () => {
+        try {
+            const response = await Axios.post('/user/find', {
+                userId: id,
+            })
+            setUsername(response.data.userName);
+        } catch (error) {
+            Swal.fire({
+                icon: "warning",
+                title: "유저 정보 로딩 실패",
+                text: "관리자에게 문의하세요",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
+        }
+    }
+
+    useEffect(() => {
+        loadUser();
+    }, []);
 
     return (
         <PageArea>
@@ -26,8 +51,14 @@ const SettingPage = () => {
                             <ModeButton toggle={toggleTheme} mode={ThemeMode}/>
                         </SettingTextBox>
                         <SettingTextBox>
-                            <SettingFunction>닉네임 변경</SettingFunction>
-                            <NicknameButton onClick={() => navigate("/nickname")}>변경</NicknameButton>
+                            {id ? (
+                                <>
+                                    <SettingFunction>닉네임 변경</SettingFunction>
+                                    <NicknameButton onClick={() => navigate("/nickname")}>변경</NicknameButton>
+                                </>
+                            ) : (
+                                 <LoginText>닉네임 변경은 로그인이 필요합니다.</LoginText>
+                             )}
                         </SettingTextBox>
                         <SettingTextBox>
                             <SettingFunction>버전</SettingFunction>
@@ -63,6 +94,12 @@ const SettingBox = styled.div`
 
 const UserNameText = styled.p`
     font-size: 32px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.textColor};
+`
+
+const LoginText = styled.p`
+    font-size: 22px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
 `
