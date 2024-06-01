@@ -4,7 +4,7 @@ import Pagination from "../components/Pagination";
 import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
-import Axios from "../api/Axios";
+import Loading from "../components/Loading";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -13,12 +13,15 @@ const SearchPage = () => {
     const params = useParams();
     const [flatList, setFlatList] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
     const PER_PAGE = 5;
     
     useEffect(() => {
+        setIsLoading(true);
         const item = location.state || [];
         const flattened = item.flat();
         setFlatList(flattened);
+        setIsLoading(false);
     }, [location.state]);
     
     const pageCount = Math.ceil(flatList.length / PER_PAGE);
@@ -31,17 +34,20 @@ const SearchPage = () => {
         <PageArea>
             <Statusbar />
             <MainArea>
-                <Searchbar />
+                <Searchbar setIsLoading={setIsLoading} />
                 <TitleArea>
                     <TitleText>{params.content}에 대한 검색결과</TitleText>
                 </TitleArea>
                 <MainBox>
-                    {flatList
-                        .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
-                        .map((item, index) => (
-                            <SmallThumbnailBox item={item} key={index} />
-                        ))
-                    }
+                    {isLoading ? (
+                        <Loading />
+                    ) : (
+                        flatList
+                            .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
+                            .map((item, index) => (
+                                <SmallThumbnailBox item={item} key={index} />
+                            ))
+                    )}
                 </MainBox>
                 {pageCount > 0 && (
                     <Pagination

@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Axios from "../api/Axios";
 import { useNavigate } from "react-router-dom";
 
-const Searchbar = ({setList}) => {
+const Searchbar = ({setIsLoading}) => {
     const navigate = useNavigate();
     const [content, setContent] = useState('');
 
@@ -16,6 +16,7 @@ const Searchbar = ({setList}) => {
     };
 
     const search = async (content) => {
+        setIsLoading(true);
         try {
             const response = await Axios.post('/search', {
                 query: content,
@@ -25,6 +26,8 @@ const Searchbar = ({setList}) => {
             navigate(`/search/${content}`, { state: searchData });
         } catch (error) {
             console.error("Error searching data:", error);
+        } finally {
+            setIsLoading(false);
         }
     };
 

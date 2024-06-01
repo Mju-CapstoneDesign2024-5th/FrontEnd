@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useTheme } from "../styles/ThemeProvider";
 import Searchbar from "../components/Searchbar";
@@ -10,11 +10,13 @@ const SettingPage = () => {
     const [ThemeMode, toggleTheme] = useTheme();
     const navigate = useNavigate();
     const username = localStorage.getItem('username');
+    const [isLoading, setIsLoading] = useState(false);
+
     return (
         <PageArea>
             <Statusbar/>
             <SettingArea>
-                <Searchbar/>
+                <Searchbar setIsLoading={setIsLoading}/>
                 <SettingBox>
                     <UserNameText>안녕하세요, {username ? username : "로그인을 해주세요"}!</UserNameText>
                     <SettingContent>

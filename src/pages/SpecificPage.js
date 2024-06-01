@@ -11,8 +11,7 @@ const SpecificPage = () => {
     const location = useLocation();
     const item = location.state;
     const [similar, setSimilar] = useState([]);
-
-    console.log(item);
+    const [isLoading, setIsLoading] = useState(false);
 
     const loadSimilar = async () => {
         await Axios.post("/sim", {
@@ -33,7 +32,7 @@ const SpecificPage = () => {
     return(
         <PageArea>
             <SpecificArea>
-                 <SearchBar/>
+                 <SearchBar setIsLoading={setIsLoading}/>
                 <LargeThumbnailBox item={item}/>
                 <SimilarArea>
                     <SimilarTitle>
