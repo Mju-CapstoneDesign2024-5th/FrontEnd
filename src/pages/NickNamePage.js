@@ -1,9 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
+import Axios from "../api/Axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const NickNamePage = () => {
+    const [username, setUsername] = useState(null);
+    const [changedNickname, setChangedNickname] = useState('');
+    const id = localStorage.getItem('id');
+    const navigate = useNavigate();
+
+    const loadUser = async () => {
+        try {
+            const response = await Axios.post('/user/find', {
+                userId: id,
+            })
+            setUsername(response.data.userName);
+        } catch (error) {
+            Swal.fire({
+                icon: "warning",
+                title: "유저 정보 로딩 실패",
+                text: "관리자에게 문의하세요",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
+        }
+    }
+
+    const handleChangeClick = () => {
+        if (changedNickname === undefined | changedNickname === ''){
+            Swal.fire({
+                icon: "warning",
+                title: "닉네임 변경 실패",
+                text: "빈칸으로는 변경할 수 없습니다",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
+        } else {
+            try {
+                const response = Axios.post('/user/changeName', {
+                    userId: id,
+                    newUserName: changedNickname,
+                });
+                Swal.fire({
+                    icon: "success",
+                    title: "닉네임 변경 성공!",
+                    text: "설정 페이지로 이동합니다",
+                    showCancelButton: true,
+                    confirmButtonText: "확인",
+                }).then((res) => navigate("/setting"))
+            } catch (error) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "닉네임 변경 실패",
+                    text: "관리자에게 문의하세요",
+                    showCancelButton: true,
+                    confirmButtonText: "확인",
+                    cancelButtonText: "취소",
+                })
+            }
+        }
+    }
+
+    useEffect(() => {
+        loadUser();
+    }, [username]);
+
     return (
         <PageArea>
             <Statusbar/>
@@ -14,15 +80,15 @@ const NickNamePage = () => {
                     <SettingContent>
                         <SettingTextBox>
                             <SettingFunction>현재 닉네임</SettingFunction>
-                            <NickNameText>현재 닉네임</NickNameText>
+                            <NickNameText>{username}</NickNameText>
                         </SettingTextBox>
                         <SettingTextBox>
                             <SettingFunction>변경 닉네임</SettingFunction>
-                            <NickNameInput/>
+                            <NickNameInput required type="text" value={changedNickname || ""} onChange={(e) => setChangedNickname(e.target.value)}/>
                         </SettingTextBox>
                         <SettingTextBox>
                             <AlertText>닉네임을 변경하시겠습니까?</AlertText>
-                            <SettingButton>변경</SettingButton>
+                            <SettingButton onClick={handleChangeClick}>변경</SettingButton>
                         </SettingTextBox>
                     </SettingContent>
                 </SettingBox>
