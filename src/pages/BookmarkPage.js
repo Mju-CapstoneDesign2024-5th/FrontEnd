@@ -10,6 +10,7 @@ const BookmarkPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [list, setList] = useState([]);
     const myId = localStorage.getItem('id');
+    const [isLoading, setIsLoading] = useState(false);
 
     const PER_PAGE = 5;
     const pageCount = Math.ceil(list.length / PER_PAGE);
@@ -36,7 +37,7 @@ const BookmarkPage = () => {
         <PageArea>
             <Statusbar/>
             <MainArea>
-                <Searchbar/>
+                <Searchbar setIsLoading={setIsLoading}/>
                 <TitleArea>
                     <TitleText>즐겨찾기한 질문</TitleText>
                 </TitleArea>

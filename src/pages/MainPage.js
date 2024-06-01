@@ -5,30 +5,30 @@ import Statusbar from "../components/Statusbar";
 import Searchbar from "../components/Searchbar";
 import SmallThumbnailBox from "../components/SmallThumbnailBox";
 import Axios from "../api/Axios";
-import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const MainPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [list, setList] = useState([]);
     const PER_PAGE = 5;
     const pageCount = Math.ceil(list.length / PER_PAGE);
+    const [isLoading, setIsLoading] = useState(false);
+
     const handlePageChange = ({selected}) => {
         setCurrentPage(selected);
     }
-    const main = async () => {
-        await Axios.get(
-          "/main"
-        )
-          .then((response) => {
-            setList(response.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
-      };
 
-      console.log(list);
-    
+    const main = async () => {
+        setIsLoading(true);
+        try {
+            const response = await Axios.get("/main");
+            setList(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
         main();
@@ -38,17 +38,20 @@ const MainPage = () => {
         <PageArea>
             <Statusbar/>
             <MainArea>
-                <Searchbar/>
+                <Searchbar setIsLoading={setIsLoading}/>
                 <TitleArea>
                     <TitleText>메인 페이지</TitleText>
                 </TitleArea>
                 <MainBox>
-                    {list
-                        .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
-                        .map((item, index) => (
-                            <SmallThumbnailBox item={item} key={index}/>
-                        ))
-                    }
+                    {isLoading ? (
+                        <Loading />
+                    ) : (
+                        list
+                            .slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE)
+                            .map((item, index) => (
+                                <SmallThumbnailBox item={item} key={index} />
+                            ))
+                    )}
                 </MainBox>
                 {pageCount > 0 && (
                     <Pagination
