@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Axios from "../api/Axios";
+import Swal from "sweetalert2";
 
 const BookmarkBar = ({ questionId, userId }) => {
     const id = userId;
@@ -14,9 +15,23 @@ const BookmarkBar = ({ questionId, userId }) => {
                 userId: id,
                 contentsId: qid
             });
-            alert("추가 완료");
+            Swal.fire({
+                icon: "success",
+                title: "즐겨찾기 완료",
+                text: "중복 즐겨찾기는 반영되지 않습니다!",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
         } catch (error) {
-            console.error("Error adding bookmark:", error);
+            Swal.fire({
+                icon: "error",
+                title: "서버 오류",
+                text: "관리자에게 문의하세요",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
         }
     };
 
@@ -31,27 +46,25 @@ const BookmarkBar = ({ questionId, userId }) => {
 };
 
 const BookmarkBox = styled.div`
-    width: 10vw;
-    height: 70px;
+    width: 7vw;
+    height: 35px;
     border-radius: 25px;
-    margin-top: 15px;
     display: flex;
     align-items: center;
     background-color: ${({ theme }) => theme.bgColor};
 `
 
 const LikeBox = styled.div`
-    width: 28vw;
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 500;
     color: ${({ theme }) => theme.AccentColor};
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 3px;
     font-weight: 600;
-    font-size: 24px;
 `
 
 export default BookmarkBar;

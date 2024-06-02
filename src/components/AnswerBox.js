@@ -21,7 +21,7 @@ const ContentBox = styled.div`
 `
 
 const ContentText = styled.p`
-    font-size: 15px;
+    font-size: 11px;
     font-weight: 500;
     color: ${({ theme }) => theme.bgColor};
     margin-top: 12px;

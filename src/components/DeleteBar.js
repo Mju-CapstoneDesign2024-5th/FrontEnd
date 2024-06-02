@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import Axios from "../api/Axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const DeleteBar = ({questionId, userId}) => {
     const id = userId;
     const qid = questionId;
-    const navigate = useNavigate();
 
     const deleteBookmark = async (id, qid) => {
         try {
@@ -16,10 +16,23 @@ const DeleteBar = ({questionId, userId}) => {
                 userId: id,
                 contentsId: qid
             });
-            alert("삭제 완료");
-            navigate("/bookmark");
+            Swal.fire({
+                icon: "success",
+                title: "삭제 완료",
+                text: "즐겨찾기에서 삭제되었습니다",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
         } catch (error) {
-            console.error("Error deleting bookmark:", error);
+            Swal.fire({
+                icon: "error",
+                title: "즐겨찾기에 없는 질문입니다",
+                text: "즐겨찾기에 없는 글은 삭제할 수 없습니다",
+                showCancelButton: true,
+                confirmButtonText: "확인",
+                cancelButtonText: "취소",
+            })
         }
     };
 
@@ -34,27 +47,25 @@ const DeleteBar = ({questionId, userId}) => {
 }
 
 const BookmarkBox = styled.div`
-    width: 10vw;
-    height: 70px;
+    width: 7vw;
+    height: 35px;
     border-radius: 25px;
-    margin-top: 15px;
     display: flex;
     align-items: center;
     background-color: ${({ theme }) => theme.bgColor};
 `
 
 const LikeBox = styled.div`
-    width: 28vw;
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 500;
     color: ${({ theme }) => theme.AccentColor};
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 3px;
     font-weight: 600;
-    font-size: 24px;
 `
 
 export default DeleteBar;

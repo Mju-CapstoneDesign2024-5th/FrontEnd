@@ -49,18 +49,18 @@ const TitleArea = styled.div`
     width: 100%;
     height: 65px;
     display: flex;
-    margin-top: 64px;
+    margin-top: 60px;
     margin-left: 10%;
 `
 
 const GoHomeButton = styled.button`
-    width: 200px;
-    height: 50px;
+    width: 8vw;
+    height: 30px;
     border-radius: 100px;
     background-color: ${({ theme }) => theme.titleColor};
-    margin-left: 33%;
+    margin-left: 25%;
     border: none;
-    font-size: 20px;
+    font-size: 11px;
     font-weight: 600;
     text-align: center;
     color: ${({ theme }) => theme.barColor};
@@ -68,7 +68,7 @@ const GoHomeButton = styled.button`
 `
 
 const TitleText = styled.span`
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 600;
     color: ${({ theme }) => theme.titleColor};
 `
@@ -91,7 +91,7 @@ const DivLine = styled.div`
     height: 8px;
     background-color: ${({ theme }) => theme.titleColor};
     border-radius: 20px;
-    margin-top: 24px;
+    margin-top: 20px;
     margin-bottom: 24px;
     margin-left: 10%;
 `

@@ -75,7 +75,7 @@ const SimilarArea = styled.div`
 `
 
 const SimilarTitle = styled.p`
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 600;
     color: ${({ theme }) => theme.textColor};
 `

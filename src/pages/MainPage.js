@@ -26,7 +26,7 @@ const MainPage = () => {
             setList(response.data);
         } catch (error) {
             Swal.fire({
-                icon: "warning",
+                icon: "error",
                 title: "데이터 로딩 실패",
                 text: "관리자에게 문의하세요",
                 showCancelButton: true,
@@ -98,12 +98,12 @@ const TitleText = styled.p`
 `
 
 const MainBox = styled.div`
-    width: 85%;
-    height: 70%;
+    width: 98%;
+    height: 63%;
     display: flex;
     flex-wrap: wrap;
-    margin-left: 10%;
-    gap: 50px;
+    margin-left: 1%;
+    gap: 38px;
 `
 
 export default MainPage;

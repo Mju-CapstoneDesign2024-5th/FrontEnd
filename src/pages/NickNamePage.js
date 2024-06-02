@@ -20,7 +20,7 @@ const NickNamePage = () => {
             setUsername(response.data.userName);
         } catch (error) {
             Swal.fire({
-                icon: "warning",
+                icon: "error",
                 title: "유저 정보 로딩 실패",
                 text: "관리자에게 문의하세요",
                 showCancelButton: true,
@@ -33,7 +33,7 @@ const NickNamePage = () => {
     const handleChangeClick = () => {
         if (changedNickname === undefined | changedNickname === ''){
             Swal.fire({
-                icon: "warning",
+                icon: "error",
                 title: "닉네임 변경 실패",
                 text: "빈칸으로는 변경할 수 없습니다",
                 showCancelButton: true,
@@ -55,7 +55,7 @@ const NickNamePage = () => {
                 }).then((res) => navigate("/setting"))
             } catch (error) {
                 Swal.fire({
-                    icon: "warning",
+                    icon: "error",
                     title: "닉네임 변경 실패",
                     text: "관리자에게 문의하세요",
                     showCancelButton: true,

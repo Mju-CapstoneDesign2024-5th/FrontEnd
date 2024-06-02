@@ -46,8 +46,10 @@ const LargeThumbnailBox = ({item}) => {
                 <InfoArea>
                     <ViewCount>조회수: {item.view}회</ViewCount>
                     <RegisterDate>등록일: {item.date}</RegisterDate>
-                    <InfoTitle>원본 글로 가고 싶다면?</InfoTitle>
-                    <InfoLink href={item.srcLink}>여기를 클릭!</InfoLink>
+                    <LinkBox>
+                        <InfoTitle>원본 글로 가고 싶다면?</InfoTitle>
+                        <InfoLink><a href={item.srcLink}>여기를 클릭!</a></InfoLink>
+                    </LinkBox>
                 </InfoArea>
             </RightsideArea>
         </ContentArea>
@@ -56,7 +58,7 @@ const LargeThumbnailBox = ({item}) => {
 
 const ContentArea = styled.div`
     width: 73%;
-    height: 61%;
+    height: 51%;
     border-radius: 5%;
     margin-top: 6px;
     margin-left: 1%;
@@ -88,7 +90,7 @@ const ButtonArea = styled.div`
 `
 
 const CautionMessage = styled.p`
-    font-size: 24px;
+    font-size: 15px;
     font-weight: 600;
     color: ${({ theme }) => theme.textColor};
 `
@@ -102,19 +104,18 @@ const RightsideArea = styled.div`
 
 const TitleArea = styled.div`
     width: 100%;
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
 `
 
 const TitleText = styled.p`
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 600;
     color: ${({ theme }) => theme.textColor};
 `
 
 const DescriptionText = styled.p`
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
 `
@@ -124,48 +125,53 @@ const DivLine = styled.div`
     height: 8px;
     border-radius: 20px;
     background-color: ${({ theme }) => theme.titleColor};
-    margin-top: 22px;
+    margin-top: 10px;
 `
 
 const ContentBox = styled.div`
     width: 90%;
-    height: 30%;
-    font-size: 22px;
+    height: 20%;
+    font-size: 14px;
     font-weight: 500;
-    margin-top: 22px;
+    margin-top: 10px;
     color: ${({ theme }) => theme.textColor};
     line-height: 30px;
+`
+
+const LinkBox = styled.div`
+    display: flex;
+    gap: 5px;
+    margin-left: 25%;
 `
 
 const InfoArea = styled.div`
     width: 90%;
     height: 40px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-top: 8%;
+    margin-top: 15%;
+    gap: 30px;
 `
 
 const InfoTitle = styled.p`
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 600;
     color: ${({ theme }) => theme.titleColor};
 `
 
-const InfoLink = styled.a`
-    font-size: 18px;
+const InfoLink = styled.p`
+    font-size: 13px;
     font-weight: 600;
     color: ${({ theme }) => theme.AccentColor};
 `
 
 const ViewCount = styled.p`
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
 `
 
 const RegisterDate = styled.p`
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
 `

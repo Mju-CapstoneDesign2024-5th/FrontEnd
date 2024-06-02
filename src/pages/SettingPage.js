@@ -23,9 +23,9 @@ const SettingPage = () => {
             setUsername(response.data.userName);
         } catch (error) {
             Swal.fire({
-                icon: "warning",
-                title: "유저 정보 로딩 실패",
-                text: "관리자에게 문의하세요",
+                icon: "info",
+                title: "로그인을 해주세요",
+                text: "로그인을 통해 설정을 관리하세요",
                 showCancelButton: true,
                 confirmButtonText: "확인",
                 cancelButtonText: "취소",
@@ -110,7 +110,7 @@ const SettingContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 51px;
+    margin-top: 30px;
 `
 
 const SettingTitle = styled.p`
@@ -125,6 +125,7 @@ const SettingTextBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
 `
 
 const SettingFunction = styled.p`
