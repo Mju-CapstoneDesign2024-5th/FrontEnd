@@ -86,12 +86,12 @@ const TitleText = styled.p`
 `
 
 const MainBox = styled.div`
-    width: 85%;
-    height: 70%;
+    width: 98%;
+    height: 63%;
     display: flex;
     flex-wrap: wrap;
-    margin-left: 10%;
-    gap: 50px;
+    margin-left: 1%;
+    gap: 38px;
 `
 
 export default SearchPage;

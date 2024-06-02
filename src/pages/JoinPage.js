@@ -17,7 +17,7 @@ const JoinPage = () => {
         if(myId === undefined | myName === undefined | myGender === undefined | myPassword === undefined | myEmail === undefined | myId === '' | myName === '' |
             myGender === '' | myPassword === '' | myEmail === ''){
                 Swal.fire({
-                    icon: "warning",
+                    icon: "error",
                     title: "회원가입 실패",
                     text: "빈칸으로는 회원가입할 수 없습니다",
                     showCancelButton: true,
@@ -82,14 +82,14 @@ const LoginBox = styled.div`
     flex-direction: column;
     align-items: center;
     margin-left: 61px;
-    margin-top: 81px;
+    margin-top: 10px;
 `
 
 const LoginTitle = styled.p`
     color: ${({ theme }) => theme.textColor};
     font-weight: 600;
     font-size: 36px;
-    margin-top: 100px;
+    margin-top: 30px;
 `
 
 const InfoInput = styled.input`
@@ -98,7 +98,7 @@ const InfoInput = styled.input`
     width: 80%;
     outline: none;
     background-color: ${({ theme }) => theme.bgColor};
-    margin-top: 100px;
+    margin-top: 50px;
     padding: 10px;
     color: ${({ theme }) => theme.textColor};
     font-size: 24px;

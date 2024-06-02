@@ -38,8 +38,8 @@ const SmallThumbnailBox = ({item}) => {
 }
 
 const ContentArea = styled.div`
-    width: 20vw;
-    height: 30vh;
+    width: 22vw;
+    height: 34vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,32 +58,32 @@ const ThumbnailBox = styled.img`
 `
 
 const TextArea = styled.div`
-    width: 95%;
-    height: 30%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin-left: 16px;
-    margin-left: 12px;
+    white-space: wrap;
 `
 
 const TitleText = styled.p`
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
 `
 
 const InfoBox = styled.div`
     display: flex;
+    margin-top: -20px;
 `
 
 const ViewCount = styled.p`
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
 `
 
 const RegisterDate = styled.p`
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 500;
     color: ${({ theme }) => theme.textColor};
     margin-left: 8px;

@@ -91,14 +91,13 @@ const LoginBox = styled.div`
     flex-direction: column;
     align-items: center;
     margin-left: 61px;
-    margin-top: 81px;
 `
 
 const LoginTitle = styled.p`
     color: ${({ theme }) => theme.textColor};
     font-weight: 600;
     font-size: 36px;
-    margin-top: 160px;
+    margin-top: 50px;
 `
 
 const IdInput = styled.input`
@@ -107,7 +106,7 @@ const IdInput = styled.input`
     width: 80%;
     outline: none;
     background-color: ${({ theme }) => theme.bgColor};
-    margin-top: 162px;
+    margin-top: 100px;
     padding: 10px;
     color: ${({ theme }) => theme.textColor};
     font-size: 24px;

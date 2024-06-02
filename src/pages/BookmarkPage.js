@@ -84,7 +84,7 @@ const MainArea = styled.div`
 `
 
 const LoginText = styled.p`
-    font-size: 44px;
+    font-size: 38px;
     font-weight: 600;
     color: ${({ theme }) => theme.textColor};
     margin-top: 20%;
@@ -104,12 +104,12 @@ const TitleText = styled.p`
 `
 
 const MainBox = styled.div`
-    width: 70%;
-    height: 70%;
+    width: 98%;
+    height: 63%;
     display: flex;
     flex-wrap: wrap;
-    margin-left: 12%;
-    gap: 50px;
+    margin-left: 1%;
+    gap: 38px;
 `
 
 export default BookmarkPage;
